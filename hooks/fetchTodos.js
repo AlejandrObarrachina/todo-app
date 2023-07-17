@@ -17,6 +17,8 @@ const useFetchTodos = () => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setTodos(docSnap.data().todos);
+        } else {
+          setTodos({});
         }
       } catch (err) {
         setError("Failed to load todos");
@@ -27,7 +29,7 @@ const useFetchTodos = () => {
     fetchData();
   }, []);
 
-  return { loading, error, todos };
+  return { loading, error, todos, setTodos };
 };
 
 export default useFetchTodos;
